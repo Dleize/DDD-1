@@ -6,13 +6,12 @@ Identificar os subdomínios do projeto, classificá-los (Core, Supporting, Gener
 ---
 
 ## 1. Nome do Projeto
-**[Escreva o nome do sistema ou aplicação que está sendo modelado]**
+**Investigações**
 
 ---
 
 ## 2. Objetivo Principal do Projeto
-**[Explique o propósito do sistema em uma ou duas frases]**  
-*Exemplo:* Facilitar o agendamento de consultas médicas online entre pacientes e médicos.
+**Idetificar e monitorar transações suspeitas utilizando IA cumprindo as normas de prevenção em lavagem de dinheiro**
 
 ---
 
@@ -21,9 +20,9 @@ Liste os subdomínios do sistema e classifique-os como **Core Domain**, **Suppor
 
 | **Subdomínio**              | **Descrição**                                                                                      | **Tipo**         |
 |-----------------------------|--------------------------------------------------------------------------------------------------|------------------|
-| Ex.: Gestão de Consultas    | Gerencia o agendamento, consulta por vídeo e emissão de atestados e receitas.                   | Core Domain      |
-| Ex.: Cadastro de Usuários   | Gerencia o login, cadastro e permissões dos médicos e pacientes.                                | Supporting       |
-| Ex.: Pagamentos             | Processa pagamentos e repassa valores para médicos.                                             | Generic          |
+| Ex.: Análise de Atipicidades      | Identifica proativamente riscos potenciais e movimentações financeiras incompatíveis com o perfil do cliente. | Core Domain |
+| Ex.: Busca de Dados               | Captura informações de plataformas internas e fontes externas (como dados de empresas e CNPJs).               | Supporting  |
+| Ex.: Canal de Interação (Chatbot) | Interface de comunicação baseada em chat para interação com os analistas de PLD.                              | Generic     |
 
 ---
 
@@ -52,12 +51,12 @@ Explique como os bounded contexts vão se comunicar. Use os padrões de comunica
 ## 6. Definição da Linguagem Ubíqua
 Liste os termos principais da Linguagem Ubíqua do projeto. Explique brevemente cada termo.
 
-| **Termo**                    | **Descrição**                                                                                   |
+| **Termo**                    | **Descrição**                                                                                 |
 |------------------------------|-----------------------------------------------------------------------------------------------|
-| Ex.: Consulta                | Sessão médica entre paciente e médico.                                                       |
-| Ex.: Paciente                | Usuário que agenda e realiza consultas.                                                      |
-| Ex.: Receita                 | Prescrição médica gerada durante a consulta.                                                 |
-
+| Ex.: Atipicidade             | Movimentação de recursos incompatível com o patrimônio ou ocupação profissional               |
+| Ex.: Laranja                 | Pessoa ou empresa de fachada usada para ocultar os reais donos de recursos ilícitos.          |
+| Ex.: PLD/FTP-C               | Prevenção à Lavagem de Dinheiro, Financiamento do Terrorismo e Proliferação de Armas.         |
+| Ex.: Análise de Extrato      | Processo automatizado de identificação de saques, Pix e depósitos suspeitos.                  |
 ---
 
 ## 7. Estratégia de Desenvolvimento
@@ -66,11 +65,11 @@ Para cada tipo de subdomínio, explique a abordagem para implementação:
 - **Supporting Subdomain:** Desenvolver internamente ou parcialmente terceirizar.
 - **Generic Subdomain:** Usar ferramentas ou serviços de mercado.
 
-| **Subdomínio**              | **Estratégia**                         | **Ferramentas ou Serviços (se aplicável)** |
-|-----------------------------|---------------------------------------|-------------------------------------------|
-| Gestão de Consultas         | Desenvolvimento interno               |                                           |
-| Cadastro de Usuários        | Interno com uso de Auth0 para login   | Auth0                                     |
-| Pagamentos                  | Terceirizar usando API Stripe         | Stripe                                    |
+| **Subdomínio**              | **Estratégia**                                                                    | **Ferramentas ou Serviços (se aplicável)**  |
+|-----------------------------|-----------------------------------------------------------------------------------|---------------------------------------------| 
+| Análise de Atipicidades     | Desenvolvimento Interno com foco em modelos preditivos e redes neurais.           | Modelos de IA personalizados.               |
+| Busca de Dados              | Parcialmente Terceirizado ou via barramento de APIs internas.                     | Crawler de fontes públicas e APIs internas. |
+| Chatbot                     | Uso de Ferramentas de Mercado para a estrutura de interface conversacional.       | Azure Bot Service                           |
 
 ---
 
