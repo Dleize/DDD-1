@@ -30,9 +30,10 @@ Liste os subdomínios do sistema e classifique-os como **Core Domain**, **Suppor
 Liste e descreva os bounded contexts identificados no projeto. Explique a responsabilidade de cada um.
 
 | **Bounded Context**           | **Responsabilidade**                                                                                 | **Subdomínios Relacionados** |
-|-------------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------|
-| Ex.: Contexto de Consultas    | Gerencia as consultas médicas, do agendamento à finalização, incluindo emissão de receitas.         | Gestão de Consultas         |
-| Ex.: Contexto de Pagamentos   | Processa cobranças de consultas e repasses para médicos ou clínicas.                              | Pagamentos                  |
+|-------------------------------|------------------------------------------------------------------------------------------------------|-----------------------------|
+| Ex.: Contexto de IA                             | Realizar análise automatizada de extratos, identificar padrões atípicos, calcular score de risco e gerar relatórios inteligentes para os analistas.                 | Análise de Atipicidades        |
+| Ex.: Contexto de Curadoria de Dados             | Consultar e consolidar informações internas e externas para enriquecer a análise.                                                                                   | Busca de Dados                 |
+| Ex.: Contexto de Assistente Conversacional      | Gerencia a interação em linguagem natural com o analista, interpretando as dúvidas e sintetizando os relatórios inteligentes e contextualizados para envio ao COAF. | Canal de Interação             |
 
 ---
 
@@ -42,10 +43,12 @@ Explique como os bounded contexts vão se comunicar. Use os padrões de comunica
 - **APIs (síncrono):** Ex.: O Contexto de Pagamentos consulta informações de preços no Contexto de Consultas.
 
 | **De (Origem)**              | **Para (Destino)**          | **Forma de Comunicação**    | **Exemplo de Evento/Chamada**                  |
-|------------------------------|-----------------------------|-----------------------------|-----------------------------------------------|
-| Contexto de Consultas        | Contexto de Pagamentos      | Mensageria (Evento)         | "Consulta Finalizada"                         |
-| Contexto de Cadastro          | Contexto de Consultas      | API                         | Obter informações de um Paciente pelo ID      |
-
+|------------------------------|---------------------------------|-----------------------------|-----------------------------------------------|
+| Contexto de IA                        | Contexto de Curadoria de Dados        | API Síncrona                | GET /dados-enriquecidos/{cpf}                           |
+| Contexto de Curadoria de Dados        | Contexto de IA                        | Resposta API                | Retorno com vínculos, renda estimada, histórico externo |
+| Contexto de IA                        | Contexto de Assistente Conversacional | Evento (Mensageria)         | AnaliseDeAtipicidadeConcluida                           |
+| Contexto de Assistente Conversacional | Contexto de IA                        | API Síncrona                | GET /analise/{id}                                       |
+| Contexto de Assistente Conversacional | Contexto de Curadoria de Dados        | API Síncrona                | GET /resumo-dados/{cpf}                                 |
 ---
 
 ## 6. Definição da Linguagem Ubíqua
